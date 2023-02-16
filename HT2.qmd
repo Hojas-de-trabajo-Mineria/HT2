@@ -7,10 +7,10 @@ editor: visual
 ## Descripción de las variables
 
 ```{r}
-
+movies <- read.csv('movies.csv')
 ```
 
-## ¿Vale  la pena hacer clustering?
+## ¿Vale la pena hacer clustering?
 
 ```{r}
 1 + 
@@ -24,17 +24,19 @@ editor: visual
 ```
 
 ## Creación de clusters
+
 ```{r}
 
 ```
 
 ## Calidad del agrupamiento
+
 ```{r}
 
 ```
 
 ## Interpretación de clusters
+
 ```{r}
 
 ```
-
