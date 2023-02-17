@@ -120,9 +120,11 @@ groups <- cutree(hc, k=3)
 
 ```
 
-## Resumen de K-means
+## Resumen de clusters
 
-```{r kmgraphs}
+### K-means
+
+```{r resumen_km}
 set.seed(123)
 fviz_cluster(km, numericas_norm[complete.cases(numericas_norm),])
 
@@ -132,6 +134,14 @@ geom_point()+
 geom_smooth(method = 'lm')+
 labs(x = 'Cardinalidad (size)', y = 'Magnitud (withinss)')+
 geom_text_repel(label=rownames(m))
+```
+
+### Clustering jerárquico
+
+```{r resumen_hc}
+hc.cut<-hcut(numericasNormComplete, k=3, hc_method = "complete")
+fviz_dend(hc.cut, show_labels = FALSE, rect = TRUE)
+fviz_cluster(hc.cut, ellipse.type = "convex")
 ```
 
 ## Calidad de clusters
