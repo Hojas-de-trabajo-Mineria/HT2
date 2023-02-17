@@ -12,6 +12,7 @@ library(factoextra)
 library(ggrepel)
 library(cluster)
 library(flexclust)
+library(NbClust)
 ```
 
 ## Descripción de las variables
@@ -21,13 +22,48 @@ set.seed(123)
 
 movies <- read.csv('movies.csv')
 
+summary(movies)
+
 numericas <- movies[, c('runtime', 'voteAvg', 'voteCount', 'genresAmount', 'productionCountriesAmount', 'actorsAmount', 'actorsAmount', 'castWomenAmount', 'castMenAmount', 'budget', 'revenue', 'popularity')]
 
 numericas[,'castWomenAmount'] <- as.numeric(numericas[,'castWomenAmount'])
 numericas[,'castMenAmount'] <- as.numeric(numericas[,'castMenAmount'])
 
 numericas_norm <- mutate_if(numericas, is.numeric, scale)
+
 ```
+
+Las variables que eliminaremos, para poder hacer un agrupamiento óptimo, son todas aquellas variables cualitativas, que no neccesariamente tienen relación entre sí de película a película. Consiguientemente las variables que eliminaremos serán las siguientes:
+
+-   genres
+
+-   homePage
+
+-   productionCompany
+
+-   productionCompanyCountry
+
+-   productionCountry
+
+-   video
+
+-   director
+
+-   actors
+
+-   actorsCharacter
+
+-   originalTitle
+
+-   title
+
+-   originalLanguage
+
+-   actorsPopularity
+
+-   popularity
+
+-   releaseDate
 
 ## ¿Vale la pena hacer clustering?
 
@@ -43,10 +79,26 @@ fviz_dist(distancia, show_labels = FALSE)
 
 ## ¿Cuántos clusters son necesarios?
 
-```{r}
-#| echo: false
-2 * 2
+### Gráfica de codo
+
+```{r wss}
+numericasNormComplete <- numericas_norm[complete.cases(numericas_norm), ]
+wss <- 0
+for (i in 1:10) {
+  wss[i] <- sum(kmeans(numericasNormComplete, centers = i)$withins)
+}
+
+plot(1:10, wss, type = 'b', xlab = 'Cantidad de grupos', ylab = 'WSS')
 ```
+
+### Silueta
+
+```{r}
+fviz_nbclust(numericasNormComplete, kmeans, method = "silhouette") +
+labs(subtitle = "Silhouette method")
+```
+
+Partiendo tanto del gprafico de codo como del de Silueta, consideramos que la cantidad de Clusters necesarios son 3, ya que el gráfico de codo muestra que son necesarios 4 clusters, sin embargo el de Silueta establece que 2, por lo que consideramos que probablemente la cantidad de en medio, en este caso 3, será la más apropiada.
 
 ## Creación de clusters
 
