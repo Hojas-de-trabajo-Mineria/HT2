@@ -136,5 +136,25 @@ geom_text_repel(label=rownames(m))
 
 ## Calidad de clusters
 
+### Calidad Clusters Kmeans
+
 ```{r calidad_silueta}
+silkm<-silhouette(km$cluster,dist(numericasNormComplete))
+mean(silkm[,3])
+
+pam.res3 <- pam(numericasNormComplete, 3,  metric = "euclidean", stand = FALSE)
+
+fviz_silhouette(pam.res3, palette = "jco", ggtheme = theme_classic())
+# fviz_nbclust(numericasNormComplete, kmeans, method='silhouette')
 ```
+
+### Calidad de Clusters Jerárquico
+
+```{r}
+groups<-cutree(hc,k=3)
+silhc<-silhouette(groups,distancia)
+mean(silhc[,3])
+plot(silhc, cex.names=.4, col=1:3)
+```
+
+En este caso el método de silueta nos indica que el algoritmo de clustering jerárquico realizó un mejor agrupamiento. Esto debido a que el algoritmo Kmeans tiene un valor de silueta de 0.17, mientras que el jerárquico tiene un valor de 0.93, el cual está bastante más cerca de 1 que el de Kmeans
