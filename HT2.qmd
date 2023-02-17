@@ -22,7 +22,7 @@ set.seed(123)
 
 movies <- read.csv('movies.csv')
 
-summary(movies)
+str(movies)
 
 numericas <- movies[, c('runtime', 'voteAvg', 'voteCount', 'genresAmount', 'productionCountriesAmount', 'actorsAmount', 'actorsAmount', 'castWomenAmount', 'castMenAmount', 'budget', 'revenue', 'popularity')]
 
@@ -30,6 +30,7 @@ numericas[,'castWomenAmount'] <- as.numeric(numericas[,'castWomenAmount'])
 numericas[,'castMenAmount'] <- as.numeric(numericas[,'castMenAmount'])
 
 numericas_norm <- mutate_if(numericas, is.numeric, scale)
+numericasNormComplete <- na.omit(numericas_norm)
 
 ```
 
@@ -68,13 +69,13 @@ Las variables que eliminaremos, para poder hacer un agrupamiento óptimo, son to
 ## ¿Vale la pena hacer clustering?
 
 ```{r hopkins}
-h <- hopkins(numericas_norm, method = 'simple')
+h <- hopkins(numericasNormComplete, method = 'simple')
 ```
 
 Al calcular el estadístico de Hopkins se obtuvo un valor $h=$`r h` , lo cual indica que vale la pena intentar un agrupamiento.
 
 ```{r VAT}
-distancia <- dist(numericas_norm)
+distancia <- dist(numericasNormComplete)
 fviz_dist(distancia, show_labels = FALSE)
 ```
 
@@ -83,7 +84,6 @@ fviz_dist(distancia, show_labels = FALSE)
 ### Gráfica de codo
 
 ```{r wss}
-numericasNormComplete <- numericas_norm[complete.cases(numericas_norm), ]
 wss <- 0
 for (i in 1:10) {
   wss[i] <- sum(kmeans(numericasNormComplete, centers = i)$withins)
@@ -103,9 +103,21 @@ Partiendo tanto del gprafico de codo como del de Silueta, consideramos que la ca
 
 ## Creación de clusters
 
+### K - means
+
 ```{r kmeans}
 set.seed(123)
-km <- kmeans(numericas_norm[complete.cases(numericas_norm),], centers = 3, iter.max = 100)
+km <- kmeans(numericasNormComplete, centers = 3, iter.max = 100)
+```
+
+### Clustering jerárquico
+
+```{r}
+hc <- hclust(dist(numericasNormComplete))
+plot(hc)
+rect.hclust(hc, k=3)
+groups <- cutree(hc, k=3)
+
 ```
 
 ## Resumen de K-means
