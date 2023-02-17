@@ -37,7 +37,8 @@ h
 ```
 
 ```{r VAT}
-
+distancia <- dist(numericas_norm)
+fviz_dist(distancia, show_labels = FALSE)
 ```
 
 ## ¿Cuántos clusters son necesarios?
