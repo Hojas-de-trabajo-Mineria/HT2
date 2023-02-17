@@ -4,16 +4,40 @@ format: html
 editor: visual
 ---
 
+```{r librerias}
+#| echo: false
+library(dplyr)
+library(hopkins)
+library(factoextra)
+library(ggrepel)
+library(cluster)
+library(flexclust)
+```
+
 ## Descripción de las variables
 
 ```{r}
+set.seed(123)
+
 movies <- read.csv('movies.csv')
+
+numericas <- movies[, c('runtime', 'voteAvg', 'voteCount', 'genresAmount', 'productionCountriesAmount', 'actorsAmount', 'actorsAmount', 'castWomenAmount', 'castMenAmount', 'budget', 'revenue', 'popularity')]
+
+numericas[,'castWomenAmount'] <- as.numeric(numericas[,'castWomenAmount'])
+numericas[,'castMenAmount'] <- as.numeric(numericas[,'castMenAmount'])
+
+numericas_norm <- mutate_if(numericas, is.numeric, scale)
 ```
 
 ## ¿Vale la pena hacer clustering?
 
-```{r}
-1 + 
+```{r hopkins}
+h <- hopkins(numericas_norm, method = 'simple')
+h
+```
+
+```{r VAT}
+
 ```
 
 ## ¿Cuántos clusters son necesarios?
