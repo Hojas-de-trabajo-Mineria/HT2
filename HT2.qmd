@@ -69,8 +69,9 @@ Las variables que eliminaremos, para poder hacer un agrupamiento óptimo, son to
 
 ```{r hopkins}
 h <- hopkins(numericas_norm, method = 'simple')
-h
 ```
+
+Al calcular el estadístico de Hopkins se obtuvo un valor $h=$`r h` , lo cual indica que vale la pena intentar un agrupamiento.
 
 ```{r VAT}
 distancia <- dist(numericas_norm)
@@ -102,18 +103,26 @@ Partiendo tanto del gprafico de codo como del de Silueta, consideramos que la ca
 
 ## Creación de clusters
 
-```{r}
-
+```{r kmeans}
+set.seed(123)
+km <- kmeans(numericas_norm[complete.cases(numericas_norm),], centers = 3, iter.max = 100)
 ```
 
-## Calidad del agrupamiento
+## Resumen de K-means
 
-```{r}
+```{r kmgraphs}
+set.seed(123)
+fviz_cluster(km, numericas_norm[complete.cases(numericas_norm),])
 
+m <- data.frame(withinss = km$withinss, size=km$size)
+ggplot(m, aes(size, withinss))+
+geom_point()+
+geom_smooth(method = 'lm')+
+labs(x = 'Cardinalidad (size)', y = 'Magnitud (withinss)')+
+geom_text_repel(label=rownames(m))
 ```
 
-## Interpretación de clusters
+## Calidad de clusters
 
-```{r}
-
+```{r calidad_silueta}
 ```
