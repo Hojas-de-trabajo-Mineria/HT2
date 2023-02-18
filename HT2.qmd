@@ -168,3 +168,13 @@ plot(silhc, cex.names=.4, col=1:3)
 ```
 
 En este caso el método de silueta nos indica que el algoritmo de clustering jerárquico realizó un mejor agrupamiento. Esto debido a que el algoritmo Kmeans tiene un valor de silueta de 0.17, mientras que el jerárquico tiene un valor de 0.93, el cual está bastante más cerca de 1 que el de Kmeans
+
+Interpretacion
+
+podemos notar que segun la kmedias, el grupo 3 es el grupo de los ultimos dos generos y predominan el 5 y 6, en el grupo 2 predominan los generos 1 y 2 y el en grupo 1 predominan los generos 3 y 4
+
+```{r}
+numericasNormComplete$grupo<-km$cluster
+table(numericasNormComplete$genres,numericasNormComplete$grupo)
+
+```
