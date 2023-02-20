@@ -76,7 +76,7 @@ Al calcular el estadístico de Hopkins se obtuvo un valor $h=$`r h` , lo cual in
 
 ```{r VAT}
 distancia <- dist(numericasNormComplete)
-fviz_dist(distancia, show_labels = FALSE)
+# fviz_dist(distancia, show_labels = FALSE)
 ```
 
 ## ¿Cuántos clusters son necesarios?

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>HDT2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="HT2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HT2_files/libs/quarto-html/quarto.js"></script>
+<script src="HT2_files/libs/quarto-html/popper.min.js"></script>
+<script src="HT2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HT2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HT2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HT2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HT2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HT2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HT2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HDT2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: grid</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: modeltools</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: stats4</code></pre>
+</div>
+</div>
+<section id="descripción-de-las-variables" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-de-las-variables">Descripción de las variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>movies <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'movies.csv'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(movies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   10000 obs. of  27 variables:
+ $ id                       : int  5 6 11 12 13 14 15 16 18 19 ...
+ $ budget                   : int  4000000 21000000 11000000 94000000 55000000 15000000 839727 12800000 90000000 1300000 ...
+ $ genres                   : chr  "Crime|Comedy" "Action|Thriller|Crime" "Adventure|Action|Science Fiction" "Animation|Family" ...
+ $ homePage                 : chr  "https://www.miramax.com/movie/four-rooms/" NA "http://www.starwars.com/films/star-wars-episode-iv-a-new-hope" "http://movies.disney.com/finding-nemo" ...
+ $ productionCompany        : chr  "Miramax|A Band Apart" "Universal Pictures|Largo Entertainment|JVC" "Lucasfilm|20th Century Fox" "Pixar" ...
+ $ productionCompanyCountry : chr  "US|US" "US|US|JP" "US|US" "US" ...
+ $ productionCountry        : chr  "United States of America" "Japan|United States of America" "United States of America" "United States of America" ...
+ $ revenue                  : num  4.26e+06 1.21e+07 7.75e+08 9.40e+08 6.77e+08 ...
+ $ runtime                  : int  98 110 121 100 142 122 119 141 126 149 ...
+ $ video                    : logi  FALSE FALSE NA NA FALSE FALSE ...
+ $ director                 : chr  "Allison Anders|Alexandre Rockwell|Robert Rodriguez|Quentin Tarantino" "Stephen Hopkins" "George Lucas" "Andrew Stanton" ...
+ $ actors                   : chr  "Tim Roth|Jennifer Beals|Antonio Banderas|Valeria Golino|David Proval|Sammi Davis|Amanda de Cadenet|Madonna|Ione Skye|Lili Taylo "Emilio Estevez|Cuba Gooding Jr.|Denis Leary|Stephen Dorff|Jeremy Piven|Peter Greene|Michael DeLorenzo|Everlast|Michael Wiseman| "FALSE" "FALSE" ...
+ $ actorsPopularity         : chr  "22.225|23.519|17.816|19.893|9.027|7.147|7.769|6.476|7.906|12.838|17.988|20.027|4.47|0.6|1.286|23.95|22.082|3.44"| __truncated__ "9.008|6.383|10.757|18.295|11.772|14.777|9.669|0.98|4.369|0.6|1.38|2.835|3.807|1.4|1.111" "11.881|24.542|14.434|10.651|6.888|5.811|1.432|1.288|2.086|8.166|1.701|2.033|0.98|3.702|2.392|0.98|2.769|1.459|1"| __truncated__ "9.79|8.084|8.538|33.379|11.733|11.866|8.141|12.095|1.768|5.042|11.103|6.336|9.649|5.97|9.477|2.766|9.685|9.524|"| __truncated__ ...
+ $ actorsCharacter          : chr  "Ted the Bellhop|Angela|Man|Athena|Siegfried|Jezebel|Diana|Elspeth|Eva|Raven|Kiva|Wife|Sarah|Juancho|Corpse|TV Dancing Girl|Ches "Frank Wyatt|Mike Peterson|Fallon|John Wyatt|Ray Cochran|Sykes|Teddy, the Kid|Rhodes|Travis|Dre|Buck|Linda Wyatt|Clarissa|Rita|C "Luke Skywalker|Han Solo|Princess Leia Organa|Grand Moff Tarkin|Obi-Wan \"Ben\" Kenobi|C-3PO|R2-D2|Chewbacca|Darth Vader (perfor "Marlin (voice)|Dory (voice)|Nemo (voice)|Gill (voice)|Bloat (voice)|Peach (voice)|Gurgle (voice)|Bubbles (voice)|Deb / Flo (voi ...
+ $ originalTitle            : chr  "Four Rooms" "Judgment Night" "Star Wars" "Finding Nemo" ...
+ $ title                    : chr  "Four Rooms" "Judgment Night" "Star Wars" "Finding Nemo" ...
+ $ originalLanguage         : chr  "en" "en" "en" "en" ...
+ $ popularity               : num  20.9 9.6 100 134.4 58.8 ...
+ $ releaseDate              : chr  "1995-12-09" "1993-10-15" "1977-05-25" "2003-05-30" ...
+ $ voteAvg                  : num  5.7 6.5 8.2 7.8 8.5 8 8 7.9 7.5 8.2 ...
+ $ voteCount                : int  2077 223 16598 15928 22045 9951 4253 1335 8726 1963 ...
+ $ genresAmount             : int  2 3 3 2 3 1 2 2 5 2 ...
+ $ productionCoAmount       : int  2 3 2 1 2 2 2 26 2 1 ...
+ $ productionCountriesAmount: int  1 2 1 1 1 1 1 12 1 1 ...
+ $ actorsAmount             : int  25 15 105 24 76 40 152 29 117 24 ...
+ $ castWomenAmount          : chr  "15" "3" "5" "5" ...
+ $ castMenAmount            : chr  "9" "9" "62" "18" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>numericas <span class="ot">&lt;-</span> movies[, <span class="fu">c</span>(<span class="st">'runtime'</span>, <span class="st">'voteAvg'</span>, <span class="st">'voteCount'</span>, <span class="st">'genresAmount'</span>, <span class="st">'productionCountriesAmount'</span>, <span class="st">'actorsAmount'</span>, <span class="st">'actorsAmount'</span>, <span class="st">'castWomenAmount'</span>, <span class="st">'castMenAmount'</span>, <span class="st">'budget'</span>, <span class="st">'revenue'</span>, <span class="st">'popularity'</span>)]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>numericas[,<span class="st">'castWomenAmount'</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(numericas[,<span class="st">'castWomenAmount'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introducidos por coerción</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>numericas[,<span class="st">'castMenAmount'</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(numericas[,<span class="st">'castMenAmount'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introducidos por coerción</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>numericas_norm <span class="ot">&lt;-</span> <span class="fu">mutate_if</span>(numericas, is.numeric, scale)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>numericasNormComplete <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(numericas_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Las variables que eliminaremos, para poder hacer un agrupamiento óptimo, son todas aquellas variables cualitativas, que no neccesariamente tienen relación entre sí de película a película. Consiguientemente las variables que eliminaremos serán las siguientes:</p>
+<ul>
+<li><p>genres</p></li>
+<li><p>homePage</p></li>
+<li><p>productionCompany</p></li>
+<li><p>productionCompanyCountry</p></li>
+<li><p>productionCountry</p></li>
+<li><p>video</p></li>
+<li><p>director</p></li>
+<li><p>actors</p></li>
+<li><p>actorsCharacter</p></li>
+<li><p>originalTitle</p></li>
+<li><p>title</p></li>
+<li><p>originalLanguage</p></li>
+<li><p>actorsPopularity</p></li>
+<li><p>popularity</p></li>
+<li><p>releaseDate</p></li>
+</ul>
+</section>
+<section id="vale-la-pena-hacer-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="vale-la-pena-hacer-clustering">¿Vale la pena hacer clustering?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">hopkins</span>(numericasNormComplete, <span class="at">method =</span> <span class="st">'simple'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Al calcular el estadístico de Hopkins se obtuvo un valor $h=$0.9999786 , lo cual indica que vale la pena intentar un agrupamiento.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>distancia <span class="ot">&lt;-</span> <span class="fu">dist</span>(numericasNormComplete)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fviz_dist(distancia, show_labels = FALSE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cuántos-clusters-son-necesarios" class="level2">
+<h2 class="anchored" data-anchor-id="cuántos-clusters-son-necesarios">¿Cuántos clusters son necesarios?</h2>
+<section id="gráfica-de-codo" class="level3">
+<h3 class="anchored" data-anchor-id="gráfica-de-codo">Gráfica de codo</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>wss <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  wss[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">kmeans</span>(numericasNormComplete, <span class="at">centers =</span> i)<span class="sc">$</span>withins)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, wss, <span class="at">type =</span> <span class="st">'b'</span>, <span class="at">xlab =</span> <span class="st">'Cantidad de grupos'</span>, <span class="at">ylab =</span> <span class="st">'WSS'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/wss-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="silueta" class="level3">
+<h3 class="anchored" data-anchor-id="silueta">Silueta</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(numericasNormComplete, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Silhouette method"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Partiendo tanto del gprafico de codo como del de Silueta, consideramos que la cantidad de Clusters necesarios son 3, ya que el gráfico de codo muestra que son necesarios 4 clusters, sin embargo el de Silueta establece que 2, por lo que consideramos que probablemente la cantidad de en medio, en este caso 3, será la más apropiada.</p>
+</section>
+</section>
+<section id="creación-de-clusters" class="level2">
+<h2 class="anchored" data-anchor-id="creación-de-clusters">Creación de clusters</h2>
+<section id="k---means" class="level3">
+<h3 class="anchored" data-anchor-id="k---means">K - means</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(numericasNormComplete, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">iter.max =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="clustering-jerárquico" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-jerárquico">Clustering jerárquico</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hc <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(numericasNormComplete))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hc)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rect.hclust</span>(hc, <span class="at">k=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(hc, <span class="at">k=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="resumen-de-clusters" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-de-clusters">Resumen de clusters</h2>
+<section id="k-means" class="level3">
+<h3 class="anchored" data-anchor-id="k-means">K-means</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km, numericas_norm[<span class="fu">complete.cases</span>(numericas_norm),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/resumen_km-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">withinss =</span> km<span class="sc">$</span>withinss, <span class="at">size=</span>km<span class="sc">$</span>size)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(m, <span class="fu">aes</span>(size, withinss))<span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>)<span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Cardinalidad (size)'</span>, <span class="at">y =</span> <span class="st">'Magnitud (withinss)'</span>)<span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text_repel</span>(<span class="at">label=</span><span class="fu">rownames</span>(m))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/resumen_km-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="clustering-jerárquico-1" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-jerárquico-1">Clustering jerárquico</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hc.cut<span class="ot">&lt;-</span><span class="fu">hcut</span>(numericasNormComplete, <span class="at">k=</span><span class="dv">3</span>, <span class="at">hc_method =</span> <span class="st">"complete"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_dend</span>(hc.cut, <span class="at">show_labels =</span> <span class="cn">FALSE</span>, <span class="at">rect =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `&lt;scale&gt;` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+of ggplot2 3.3.4.
+ℹ The deprecated feature was likely used in the factoextra package.
+  Please report the issue at &lt;https://github.com/kassambara/factoextra/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/resumen_hc-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(hc.cut, <span class="at">ellipse.type =</span> <span class="st">"convex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/resumen_hc-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="calidad-de-clusters" class="level2">
+<h2 class="anchored" data-anchor-id="calidad-de-clusters">Calidad de clusters</h2>
+<section id="calidad-clusters-kmeans" class="level3">
+<h3 class="anchored" data-anchor-id="calidad-clusters-kmeans">Calidad Clusters Kmeans</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>silkm<span class="ot">&lt;-</span><span class="fu">silhouette</span>(km<span class="sc">$</span>cluster,<span class="fu">dist</span>(numericasNormComplete))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(silkm[,<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.171973</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pam.res3 <span class="ot">&lt;-</span> <span class="fu">pam</span>(numericasNormComplete, <span class="dv">3</span>,  <span class="at">metric =</span> <span class="st">"euclidean"</span>, <span class="at">stand =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_silhouette</span>(pam.res3, <span class="at">palette =</span> <span class="st">"jco"</span>, <span class="at">ggtheme =</span> <span class="fu">theme_classic</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  cluster size ave.sil.width
+1       1 3907          0.18
+2       2 4578          0.18
+3       3 1353          0.00</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/calidad_silueta-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fviz_nbclust(numericasNormComplete, kmeans, method='silhouette')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calidad-de-clusters-jerárquico" class="level3">
+<h3 class="anchored" data-anchor-id="calidad-de-clusters-jerárquico">Calidad de Clusters Jerárquico</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>groups<span class="ot">&lt;-</span><span class="fu">cutree</span>(hc,<span class="at">k=</span><span class="dv">3</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>silhc<span class="ot">&lt;-</span><span class="fu">silhouette</span>(groups,distancia)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(silhc[,<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9293855</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(silhc, <span class="at">cex.names=</span>.<span class="dv">4</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HT2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>En este caso el método de silueta nos indica que el algoritmo de clustering jerárquico realizó un mejor agrupamiento. Esto debido a que el algoritmo Kmeans tiene un valor de silueta de 0.17, mientras que el jerárquico tiene un valor de 0.93, el cual está bastante más cerca de 1 que el de Kmeans</p>
+<p>Interpretacion</p>
+<p>podemos notar que segun la kmedias, el grupo 3 es el grupo de los ultimos dos generos y predominan el 5 y 6, en el grupo 2 predominan los generos 1 y 2 y el en grupo 1 predominan los generos 3 y 4</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>numericasNormComplete<span class="sc">$</span>grupo<span class="ot">&lt;-</span>km<span class="sc">$</span>cluster</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(numericasNormComplete<span class="sc">$</span>genres,numericasNormComplete<span class="sc">$</span>grupo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    
+                        1    2    3
+  -1.38277149671737    14 1416  278
+  -0.516644658811093   97 1729 1202
+  0.349482179095182   282  899 2006
+  1.21560901700146    149  133 1104
+  2.08173585490773     41   16  347
+  2.94786269281401      9    5   91
+  3.81398953072028      0    0   17
+  4.68011636862656      0    0    3</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
