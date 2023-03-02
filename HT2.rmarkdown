@@ -1,0 +1,263 @@
+------------------------------------------------------------------------
+
+title: "HDT2"
+
+format: html
+
+editor: visual
+
+------------------------------------------------------------------------
+
+```{r librerias}
+
+#| echo: false
+
+library(dplyr)
+
+library(hopkins)
+
+library(factoextra)
+
+library(ggrepel)
+
+library(cluster)
+
+library(flexclust)
+
+library(NbClust)
+
+```
+
+## Descripción de las variables
+
+```{r}
+
+set.seed(123)
+
+
+
+movies <- read.csv('movies.csv')
+
+
+
+str(movies)
+
+
+
+numericas <- movies[, c('runtime', 'voteAvg', 'voteCount', 'genresAmount', 'productionCountriesAmount', 'actorsAmount', 'actorsAmount', 'castWomenAmount', 'castMenAmount', 'budget', 'revenue', 'popularity')]
+
+
+
+numericas[,'castWomenAmount'] <- as.numeric(numericas[,'castWomenAmount'])
+
+numericas[,'castMenAmount'] <- as.numeric(numericas[,'castMenAmount'])
+
+
+
+numericas_norm <- mutate_if(numericas, is.numeric, scale)
+
+numericasNormComplete <- na.omit(numericas_norm)
+
+
+
+```
+
+Las variables que eliminaremos, para poder hacer un agrupamiento óptimo, son todas aquellas variables cualitativas, que no neccesariamente tienen relación entre sí de película a película. Consiguientemente las variables que eliminaremos serán las siguientes:
+
+-   genres
+
+-   homePage
+
+-   productionCompany
+
+-   productionCompanyCountry
+
+-   productionCountry
+
+-   video
+
+-   director
+
+-   actors
+
+-   actorsCharacter
+
+-   originalTitle
+
+-   title
+
+-   originalLanguage
+
+-   actorsPopularity
+
+-   popularity
+
+-   releaseDate
+
+## ¿Vale la pena hacer clustering?
+
+```{r hopkins}
+
+h <- hopkins(numericasNormComplete, method = 'simple')
+
+```
+
+Al calcular el estadístico de Hopkins se obtuvo un valor $h=$`r h` , lo cual indica que vale la pena intentar un agrupamiento.
+
+```{r VAT}
+
+# distancia <- dist(numericasNormComplete)
+
+# fviz_dist(distancia, show_labels = FALSE)
+
+```
+
+## ¿Cuántos clusters son necesarios?
+
+### Gráfica de codo
+
+```{r wss}
+
+wss <- 0
+
+for (i in 1:10) {
+
+  wss[i] <- sum(kmeans(numericasNormComplete, centers = i)$withins)
+
+}
+
+
+
+plot(1:10, wss, type = 'b', xlab = 'Cantidad de grupos', ylab = 'WSS')
+
+```
+
+### Silueta
+
+```{r}
+
+fviz_nbclust(numericasNormComplete, kmeans, method = "silhouette") +
+
+labs(subtitle = "Silhouette method")
+
+```
+
+Partiendo tanto del gprafico de codo como del de Silueta, consideramos que la cantidad de Clusters necesarios son 3, ya que el gráfico de codo muestra que son necesarios 4 clusters, sin embargo el de Silueta establece que 2, por lo que consideramos que probablemente la cantidad de en medio, en este caso 3, será la más apropiada.
+
+## Creación de clusters
+
+### K - means
+
+```{r kmeans}
+
+set.seed(123)
+
+km <- kmeans(numericasNormComplete, centers = 3, iter.max = 100)
+
+```
+
+### Clustering jerárquico
+
+```{r}
+
+hc <- hclust(dist(numericasNormComplete))
+
+plot(hc)
+
+rect.hclust(hc, k=3)
+
+groups <- cutree(hc, k=3)
+
+
+
+```
+
+## Resumen de clusters
+
+### K-means
+
+```{r resumen_km}
+
+set.seed(123)
+
+fviz_cluster(km, numericas_norm[complete.cases(numericas_norm),])
+
+
+
+m <- data.frame(withinss = km$withinss, size=km$size)
+
+ggplot(m, aes(size, withinss))+
+
+geom_point()+
+
+geom_smooth(method = 'lm')+
+
+labs(x = 'Cardinalidad (size)', y = 'Magnitud (withinss)')+
+
+geom_text_repel(label=rownames(m))
+
+```
+
+### Clustering jerárquico
+
+```{r resumen_hc}
+
+hc.cut<-hcut(numericasNormComplete, k=3, hc_method = "complete")
+
+fviz_dend(hc.cut, show_labels = FALSE, rect = TRUE)
+
+fviz_cluster(hc.cut, ellipse.type = "convex")
+
+```
+
+## Calidad de clusters
+
+### Calidad Clusters Kmeans
+
+```{r calidad_silueta}
+
+silkm<-silhouette(km$cluster,dist(numericasNormComplete))
+
+mean(silkm[,3])
+
+
+
+pam.res3 <- pam(numericasNormComplete, 3,  metric = "euclidean", stand = FALSE)
+
+
+
+fviz_silhouette(pam.res3, palette = "jco", ggtheme = theme_classic())
+
+# fviz_nbclust(numericasNormComplete, kmeans, method='silhouette')
+
+```
+
+### Calidad de Clusters Jerárquico
+
+```{r}
+
+groups<-cutree(hc,k=3)
+
+silhc<-silhouette(groups,distancia)
+
+mean(silhc[,3])
+
+plot(silhc, cex.names=.4, col=1:3)
+
+```
+
+En este caso el método de silueta nos indica que el algoritmo de clustering jerárquico realizó un mejor agrupamiento. Esto debido a que el algoritmo Kmeans tiene un valor de silueta de 0.17, mientras que el jerárquico tiene un valor de 0.93, el cual está bastante más cerca de 1 que el de Kmeans
+
+Interpretacion
+
+podemos notar que segun la kmedias, el grupo 3 es el grupo de los ultimos dos generos y predominan el 5 y 6, en el grupo 2 predominan los generos 1 y 2 y el en grupo 1 predominan los generos 3 y 4
+
+```{r}
+
+numericasNormComplete$grupo<-km$cluster
+
+table(numericasNormComplete$genres,numericasNormComplete$grupo)
+
+
+
+```
